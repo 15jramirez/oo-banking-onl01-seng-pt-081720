@@ -21,11 +21,9 @@ class Transfer
     elsif @status =="complete"
       "Transaction already complete"
     else
-      valid? && @status == "pending"
       receiver.balance += amount
       sender.balance -= amount
       @status = "complete"
-  
     end
     
   end
