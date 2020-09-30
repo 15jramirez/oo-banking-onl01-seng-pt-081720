@@ -14,7 +14,7 @@ class Transfer
   end
   
   def execute_transaction
-    if @sender.balance < @amount 
+    if @sender.balance > @amount && valid?  
        return "Transcation rejected. Please check your account balance."
     elsif @status =="complete"
       "Transaction already complete"
@@ -25,6 +25,5 @@ class Transfer
     end
     
   end
-  end
-  
+
 end
