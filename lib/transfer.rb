@@ -1,3 +1,29 @@
 class Transfer
-  # your code here
+  attr_accessor :bank_account, :status, :amount
+  attr_reader :sender, :receiver
+  
+  def initialize(sender, receiver, amount)
+    @sender = sender
+    @receiver = receiver
+    @status = "pending"
+    @amount = amount
+  end
+  
+  def valid?
+    sender.valid? && receiver.valid? # returns flase if untrue
+  end
+  
+  def execute_transaction
+    if valid? && @status == "pending"
+      receiver.balance += amount
+      sender.balance -= amount
+      @status = "complete"
+    elsif @status =="complete"
+      "Transaction already complete"
+    elsif sender.balance < 0 
+      "Transcation rejected. Please check your account balance."
+    end
+    
+  end
+  
 end
