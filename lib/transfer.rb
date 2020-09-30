@@ -10,20 +10,19 @@ class Transfer
   end
   
   def valid?
-    sender.valid? && receiver.valid? # returns flase if untrue
+    @sender.valid? && @receiver.valid? # returns flase if untrue
   end
   
   def execute_transaction
-    if @sender.balance > @amount && valid?   
-       return "Transcation rejected. Please check your account balance."
+    if @sender.balance > @amount && valid? && status == "pending"   
+      @reciever.balance += @amount
+       @sender.balance -= @amount
+      @status = "complete"
     elsif @status =="complete"
       "Transaction already complete"
     else
-      receiver.balance += amount
-      sender.balance -= amount
-      @status = "complete"
+      "Transaction rejected. Please check your account balance."
     end
-    
   end
 
 end
