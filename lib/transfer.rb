@@ -22,6 +22,8 @@ class Transfer
       "Transaction already complete"
     elsif sender.balance < amount 
       "Transcation rejected. Please check your account balance."
+    else
+      "hello"
     end
     
   end
